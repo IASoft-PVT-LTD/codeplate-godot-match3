@@ -1,0 +1,29 @@
+{
+  "title": "Grand Finale",
+  "width": 8,
+  "height": 9,
+  "colors": 6,
+  "moves": 21,
+  "goals": [
+    {
+      "kind": "collect",
+      "color": 0,
+      "amount": 18
+    },
+    {
+      "kind": "collect",
+      "color": 1,
+      "amount": 18
+    },
+    {
+      "kind": "collect",
+      "color": 3,
+      "amount": 18
+    }
+  ],
+  "stars": [
+    1800,
+    2200,
+    2700
+  ]
+}

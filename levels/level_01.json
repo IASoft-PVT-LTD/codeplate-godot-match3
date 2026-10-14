@@ -1,0 +1,18 @@
+{
+  "title": "First Swaps",
+  "width": 8,
+  "height": 8,
+  "colors": 4,
+  "moves": 18,
+  "goals": [
+    {
+      "kind": "score",
+      "amount": 3000
+    }
+  ],
+  "stars": [
+    4100,
+    4700,
+    5600
+  ]
+}

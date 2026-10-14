@@ -1,0 +1,85 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://game/hud.gd" id="1_hud"]
+
+[node name="Hud" type="MarginContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 24
+script = ExtResource("1_hud")
+
+[node name="Rows" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 14
+
+[node name="Top" type="HBoxContainer" parent="Rows"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 14
+
+[node name="InfoChip" type="PanelContainer" parent="Rows/Top"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_type_variation = &"Chip"
+
+[node name="Info" type="VBoxContainer" parent="Rows/Top/InfoChip"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="LevelLabel" type="Label" parent="Rows/Top/InfoChip/Info"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"SmallLabel"
+text = "LEVEL 1"
+text_overrun_behavior = 3
+
+[node name="ScoreLabel" type="Label" parent="Rows/Top/InfoChip/Info"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 46
+text = "0"
+
+[node name="StarBar" type="Control" parent="Rows/Top/InfoChip/Info"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MovesChip" type="PanelContainer" parent="Rows/Top"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"Chip"
+
+[node name="Moves" type="VBoxContainer" parent="Rows/Top/MovesChip"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+theme_override_constants/separation = 0
+
+[node name="MovesCaption" type="Label" parent="Rows/Top/MovesChip/Moves"]
+layout_mode = 2
+theme_type_variation = &"SmallLabel"
+text = "MOVES"
+horizontal_alignment = 1
+
+[node name="MovesLabel" type="Label" parent="Rows/Top/MovesChip/Moves"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "20"
+horizontal_alignment = 1
+
+[node name="Goals" type="HBoxContainer" parent="Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 14
+alignment = 1

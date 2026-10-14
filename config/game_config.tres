@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="GameConfig" format=3]
+
+[ext_resource type="Script" path="res://config/game_config.gd" id="1_cfg"]
+
+[resource]
+script = ExtResource("1_cfg")
+cell_size = 80.0
+tile_fill = 0.92
+max_colors = 6
+bomb_radius = 1
+swipe_threshold = 0.35
+hint_delay = 5.0
+animation_speed = 1.0
+swap_time = 0.16
+clear_time = 0.2
+fall_time_per_cell = 0.055
+fall_min_time = 0.14
+spawn_pop_time = 0.18
+cascade_pause = 0.06
+shuffle_time = 0.45
+points_per_tile = 10
+cascade_multiplier_step = 0.5
+special_create_bonus = 50
+points_per_move_left = 100
+shake_line = 6.0
+shake_bomb = 12.0
+shake_color = 16.0
+shake_decay = 6.0
+pitch_per_cascade = 0.07
+particles_per_tile = 10
+tile_tints = PackedColorArray(1, 0.3019608, 0.42745098, 1, 0.22745098, 0.5254902, 1, 1, 0.18039216, 0.7607843, 0.49411765, 1, 1, 0.74509805, 0.043137256, 1, 0.60784316, 0.3647059, 0.8980392, 1, 1, 0.54901963, 0.25882354, 1)

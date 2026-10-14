@@ -1,0 +1,88 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://ui/title.gd" id="1_title"]
+[ext_resource type="PackedScene" path="res://ui/background.tscn" id="2_bg"]
+
+[node name="Title" type="Control"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_title")
+
+[node name="Background" parent="." instance=ExtResource("2_bg")]
+layout_mode = 1
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Rows" type="VBoxContainer" parent="Center"]
+layout_mode = 2
+theme_override_constants/separation = 28
+
+[node name="Gems" type="HBoxContainer" parent="Center/Rows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="Logo" type="Label" parent="Center/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"HeaderLabel"
+theme_override_font_sizes/font_size = 120
+text = "MATCH 3"
+horizontal_alignment = 1
+
+[node name="Tagline" type="Label" parent="Center/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"SmallLabel"
+theme_override_font_sizes/font_size = 30
+text = "Swap. Match. Cascade."
+horizontal_alignment = 1
+
+[node name="Gap" type="Control" parent="Center/Rows"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="Center/Rows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 44
+text = "Play"
+
+[node name="SettingsButton" type="Button" parent="Center/Rows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Settings"
+
+[node name="SoundButton" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -124.0
+offset_top = -124.0
+offset_right = -28.0
+offset_bottom = -28.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_type_variation = &"IconButton"
+icon_alignment = 1
+expand_icon = true

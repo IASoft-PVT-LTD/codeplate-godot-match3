@@ -1,0 +1,19 @@
+{
+  "title": "Heartbreaker",
+  "width": 8,
+  "height": 8,
+  "colors": 5,
+  "moves": 20,
+  "goals": [
+    {
+      "kind": "collect",
+      "color": 0,
+      "amount": 20
+    }
+  ],
+  "stars": [
+    2200,
+    2700,
+    3200
+  ]
+}

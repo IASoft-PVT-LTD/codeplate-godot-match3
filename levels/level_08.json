@@ -1,0 +1,23 @@
+{
+  "title": "Tall Order",
+  "width": 7,
+  "height": 9,
+  "colors": 5,
+  "moves": 16,
+  "goals": [
+    {
+      "kind": "collect",
+      "color": 4,
+      "amount": 22
+    },
+    {
+      "kind": "specials",
+      "amount": 2
+    }
+  ],
+  "stars": [
+    1700,
+    2200,
+    3100
+  ]
+}
