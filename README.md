@@ -1,6 +1,6 @@
 # Godot Match 3: a CodePlate template
 
-> **Free CodePlate template, v1.3.4.** This repository mirrors the zip on [codeplate.io](https://codeplate.io/t/godot-match3/).
+> **Free CodePlate template, v1.3.5.** This repository mirrors the zip on [codeplate.io](https://codeplate.io/t/godot-match3/).
 > Press **Use this template** to start your own repository from it, or [download the zip](https://codeplate.io/t/godot-match3/).
 > [All templates](https://codeplate.io/) · [Free License](https://codeplate.io/license/free/) · subscribers get it under the [Pro License](https://codeplate.io/license/pro/) with no credit.
 
@@ -41,6 +41,10 @@ The agent will ask you a few questions, record your decisions in `docs/project.m
 ```
 godot --path .
 ```
+
+## How this template was made
+
+This template was written largely by AI coding agents (Claude, by Anthropic). IASoft reviewed and tested the work. The template's checks run on every change. To test it, a fresh agent was given a made-up project and a set of change requests to carry out with the template. The record of that run is at [codeplate.io/t/godot-match3/eval/](https://codeplate.io/t/godot-match3/eval/).
 
 ## License
 
