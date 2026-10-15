@@ -1,18 +1,24 @@
 class_name Hud
 extends MarginContainer
-## Top bar during play: level name, score with a three-star bar, moves left, and goals.
+## The HUD during play: level name, score with a three-star bar, moves left,
+## and goals. A bar across the top in portrait; a side panel in landscape
+## (use_side_panel()).
 
 const STAR_FULL := preload("res://assets/ui/star_full.png")
 const STAR_EMPTY := preload("res://assets/ui/star_empty.png")
 const SCORE_ICON := preload("res://assets/ui/star_full.png")
 const SPECIALS_ICON := preload("res://assets/specials/color_bomb.png")
 const CHECK_ICON := preload("res://assets/ui/check.png")
+## The level caption (translated through game/strings.gd; level titles too).
+const LEVEL_TEXT := "LEVEL %d"
+const LEVEL_TITLE_TEXT := "LEVEL %d  ·  %s"
 
 @onready var _level_label: Label = %LevelLabel
 @onready var _score_label: Label = %ScoreLabel
 @onready var _star_bar: Control = %StarBar
 @onready var _moves_label: Label = %MovesLabel
-@onready var _goals_box: HBoxContainer = %Goals
+@onready var _goals_box: BoxContainer = %Goals
+@onready var _top: BoxContainer = %Top
 
 var _session: LevelSession
 var _bar: ProgressBar
@@ -27,7 +33,7 @@ var _score_tween: Tween
 func setup(session: LevelSession) -> void:
 	_session = session
 	var level := session.level
-	_level_label.text = ("LEVEL %d  ·  %s" % [level.number, level.title.to_upper()]) if level.title else "LEVEL %d" % level.number
+	_level_label.text = (tr(LEVEL_TITLE_TEXT) % [level.number, tr(level.title).to_upper()]) if level.title else tr(LEVEL_TEXT) % level.number
 
 	_bar = ProgressBar.new()
 	_bar.show_percentage = false
@@ -80,6 +86,20 @@ func setup(session: LevelSession) -> void:
 		_goals_box.add_child(chip)
 		_goal_labels.append(label)
 	refresh(false)
+
+
+## Landscape: a column `width` pixels wide down the right edge of the
+## screen, with the score, moves and goals stacked.
+func use_side_panel(width: float) -> void:
+	set_anchors_preset(Control.PRESET_RIGHT_WIDE)
+	offset_left = -width
+	offset_right = 0.0
+	offset_top = 0.0
+	offset_bottom = 0.0
+	grow_horizontal = Control.GROW_DIRECTION_BEGIN
+	_top.vertical = true
+	_goals_box.vertical = true
+	_goals_box.alignment = BoxContainer.ALIGNMENT_BEGIN
 
 
 ## Updates every number. `animate` counts the score up.

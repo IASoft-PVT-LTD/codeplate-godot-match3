@@ -127,6 +127,8 @@ func test_win_shows_result_and_saves_stars() -> void:
 	await level.request_swap(m[0], m[1])
 	expect_eq(level.session.state, LevelSession.State.WON, "won after one move")
 	expect(level.result_panel.visible, "result panel shown")
+	expect(level.result_panel.won, "the panel shows a win")
+	expect_eq((level.result_panel.get_node("%Title") as Label).text, tr(ResultPanel.WIN_TITLE), "win title")
 	expect_eq(Game.stars_for(901), 3, "three stars saved")
 	expect(level.session.bonus == 4 * Game.config.points_per_move_left, "bonus for 4 moves left")
 	_drop_test_levels()
@@ -142,7 +144,10 @@ func test_lose_shows_result() -> void:
 	await level.request_swap(m[0], m[1])
 	expect_eq(level.session.state, LevelSession.State.LOST, "lost when out of moves")
 	expect(level.result_panel.visible, "result panel shown")
-	expect_eq((level.result_panel.get_node("%Title") as Label).text, "Out of moves", "lose title")
+	expect(not level.result_panel.won, "the panel shows a loss")
+	# Compare with the panel's own constant, never the English words, so
+	# rewording the panel (or translating it) keeps this check green.
+	expect_eq((level.result_panel.get_node("%Title") as Label).text, tr(ResultPanel.LOSE_TITLE), "lose title")
 	expect_eq(Game.stars_for(902), 0, "no stars saved")
 	_drop_test_levels()
 	_restore()
@@ -168,6 +173,69 @@ func test_every_level_opens() -> void:
 		level.queue_free()
 		await frames(1)
 	_restore()
+
+
+## Opens a screen inside a `view`-sized box, as on a screen of that shape.
+func _open_in_view(scene: String, view: Vector2) -> Control:
+	var holder := Control.new()
+	holder.size = view
+	tree.root.add_child(holder)
+	var screen: Control = load(scene).instantiate()
+	if screen is LevelScreen:
+		(screen as LevelScreen).board_seed = 4242
+	holder.add_child(screen)
+	await frames(3)
+	return screen
+
+
+func test_landscape_layout_fits_1280x720() -> void:
+	_fast()
+	var layout := Game.config.layout
+	Game.config.layout = "landscape"
+	var view := Rect2(Vector2.ZERO, Vector2(1280, 720))
+	for l: LevelData in Game.levels:
+		Game.current_level = l.number
+		var level := await _open_in_view(LEVEL_SCENE, view.size) as LevelScreen
+		await until(func() -> bool: return not level.board_view.busy)
+		var board := level.board_rect()
+		var hud := level.hud.get_rect()
+		var pause := Rect2(level.pause_button.global_position - level.global_position, level.pause_button.size)
+		expect(view.encloses(board), "level %d: board %s inside the 1280x720 view" % [l.number, board])
+		expect(view.encloses(hud), "level %d: HUD %s inside the view" % [l.number, hud])
+		expect(not board.intersects(hud), "level %d: board and HUD don't overlap" % l.number)
+		expect(view.encloses(pause) and not board.intersects(pause), "level %d: pause button inside the view, off the board" % l.number)
+		if l.number == Game.levels[0].number:
+			expect(board.size.y >= view.size.y * 0.85, "board height %d is at least 85%% of the view" % int(board.size.y))
+		level.get_parent().queue_free()
+		await frames(1)
+	# The result panel lines its buttons up in a row, inside the view.
+	Game.current_level = Game.levels[0].number
+	var level := await _open_in_view(LEVEL_SCENE, view.size) as LevelScreen
+	level.result_panel.open(true, 3, 1000, 1000, 0, true)
+	await frames(2)
+	var next := level.result_panel.get_node("%NextButton") as Button
+	var levels := level.result_panel.get_node("%LevelsButton") as Button
+	expect(is_equal_approx(next.global_position.y, levels.global_position.y), "result buttons share a row")
+	for b: Button in [next, levels]:
+		expect(view.encloses(b.get_global_rect()), "result button %s inside the view" % b.name)
+	level.get_parent().queue_free()
+	await frames(1)
+	# Level select: columns from the view width.
+	var select := await _open_in_view("res://ui/level_select.tscn", view.size)
+	var grid := select.get_node("%Grid") as GridContainer
+	expect(grid.columns >= 5, "level select uses at least 5 columns at 1280 wide (got %d)" % grid.columns)
+	expect(view.encloses(grid.get_global_rect()), "level grid inside the view")
+	select.get_parent().queue_free()
+	await frames(1)
+	Game.config.layout = layout
+	_restore()
+
+
+func test_portrait_level_select_has_three_columns() -> void:
+	var select := await _open_in_view("res://ui/level_select.tscn", Vector2(720, 1280))
+	expect_eq((select.get_node("%Grid") as GridContainer).columns, 3, "3 columns at 720 wide")
+	select.get_parent().queue_free()
+	await frames(1)
 
 
 func _count_tile_views(level: LevelScreen) -> int:

@@ -4,6 +4,11 @@ extends Control
 ## (BoardView, Hud), sounds, the pause menu and the result panel.
 ## Opens the level in `Game.current_level`.
 
+## Width of the HUD side panel in the landscape layout.
+const SIDE_PANEL_WIDTH := 400.0
+## Space kept clear around the board.
+const MARGIN := 24.0
+
 ## Set before the scene enters the tree to get a fixed board (checks use this).
 var board_seed: int = 0
 var session: LevelSession
@@ -16,6 +21,8 @@ var session: LevelSession
 @onready var result_panel: ResultPanel = %ResultPanel
 
 var _running_score: int = 0
+## True with `layout = "landscape"` in config/game_config.tres.
+var landscape: bool = false
 
 
 func _ready() -> void:
@@ -34,6 +41,9 @@ func _ready() -> void:
 	result_panel.next_pressed.connect(func() -> void: Game.play_level(Game.next_level(level.number)))
 	result_panel.retry_pressed.connect(_restart)
 	result_panel.levels_pressed.connect(Game.goto_level_select)
+	landscape = Game.config.layout == "landscape"
+	if landscape:
+		_use_landscape()
 	resized.connect(_layout)
 	hud.resized.connect(_layout)
 	_layout()
@@ -60,13 +70,38 @@ func request_swap(a: Vector2i, b: Vector2i) -> void:
 		await _finish()
 
 
-## Fits the board between the HUD and the bottom bar.
+## Landscape: the HUD becomes a side panel on the right, the pause button
+## (and any booster buttons in BottomBar/Row) sits at the bottom of that
+## panel, and the result panel lines its buttons up in a row.
+func _use_landscape() -> void:
+	hud.use_side_panel(SIDE_PANEL_WIDTH)
+	bottom_bar.anchor_left = 1.0
+	bottom_bar.offset_left = -SIDE_PANEL_WIDTH
+	bottom_bar.offset_right = 0.0
+	result_panel.use_row_buttons()
+
+
+## The rectangle the board is fitted into, in this node's space.
+func board_area() -> Rect2:
+	if landscape:
+		var right := hud.position.x - MARGIN
+		return Rect2(MARGIN, MARGIN, maxf(right - MARGIN, 100.0), maxf(size.y - MARGIN * 2.0, 100.0))
+	var top := hud.position.y + hud.size.y + 28.0
+	var bottom := size.y - bottom_bar.size.y + 12.0
+	return Rect2(MARGIN, top, size.x - MARGIN * 2.0, maxf(bottom - top, 100.0))
+
+
+## The board's rectangle on screen, in this node's space.
+func board_rect() -> Rect2:
+	return Rect2(board_view.position, board_view.pixel_size() * board_view.scale)
+
+
+## Fits the board into board_area(): below the HUD in portrait, left of it in
+## landscape.
 func _layout() -> void:
 	if session == null:
 		return
-	var top := hud.position.y + hud.size.y + 28.0
-	var bottom := size.y - bottom_bar.size.y + 12.0
-	var area := Rect2(24.0, top, size.x - 48.0, maxf(bottom - top, 100.0))
+	var area := board_area()
 	var px := board_view.pixel_size()
 	var pad := Game.config.cell_size * 0.3
 	var s := minf(area.size.x / (px.x + pad), area.size.y / (px.y + pad))

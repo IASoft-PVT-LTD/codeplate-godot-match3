@@ -6,12 +6,16 @@ extends RefCounted
 ## screen=settings and screen=credits open the shared settings screen over the
 ## title.
 ##
+## layout=landscape (any screen) uses the landscape layout for this shot only;
+## add size=1280x720 for a landscape window (docs/recipes/change-screen-shape.md).
+##
 ## Extra arguments understood here (screen=level only):
 ##   level=N           level number (default: 1)
 ##   seed=N            board seed, for repeatable shots (default: 4242)
 ##   moves=N           play N hint moves first, fast (default: 0)
 ##   action=SECONDS    then play one more move at normal speed and capture
 ##                     SECONDS after it starts (use with wait=0 for mid-animation)
+##   result=won|lost   then open the win or lose panel
 ##
 ## A --script file compiles before autoloads exist, so this file must not name
 ## classes whose code uses them (like LevelScreen). It uses get() and call().
@@ -27,6 +31,8 @@ const SCREENS := {
 
 func before_add(node: Node, args: Dictionary, tree: SceneTree) -> void:
 	var game: Node = tree.root.get_node("Game")
+	if args.has("layout"):
+		(game.get("config") as Resource).set("layout", str(args["layout"]))
 	game.set("current_level", int(args.get("level", "1")))
 	if node.get("board_seed") != null:
 		node.set("board_seed", int(args.get("seed", "4242")))
@@ -55,6 +61,9 @@ func after_add(node: Node, args: Dictionary, tree: SceneTree) -> void:
 			break
 		await node.call("request_swap", m[0], m[1])
 	config.set("animation_speed", speed)
+	if args.has("result"):
+		var won := str(args["result"]) == "won"
+		(node.get("result_panel") as Node).call("open", won, 3 if won else 0, 4200, 4200, 0, won)
 	if args.has("action"):
 		var m := Moves.best((node.get("session") as LevelSession).board)
 		if not m.is_empty():

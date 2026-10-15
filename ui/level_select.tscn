@@ -52,6 +52,7 @@ theme_override_font_sizes/font_size = 64
 text = "Levels"
 
 [node name="TotalStars" type="Label" parent="Margin/Rows/Header"]
+auto_translate_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 36

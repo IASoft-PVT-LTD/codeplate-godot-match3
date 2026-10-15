@@ -3,6 +3,15 @@ extends Resource
 ## Every gameplay, scoring and game-feel number lives here. Change values in
 ## config/game_config.tres; code reads them through `Game.config`.
 
+@export_group("Screen")
+## "portrait" (720x1280: HUD on top, board below) or "landscape" (1280x720:
+## HUD in a side panel on the right, board on the left). Set the matching
+## window size in project.godot too: docs/recipes/change-screen-shape.md.
+@export_enum("portrait", "landscape") var layout: String = "portrait"
+## The picture behind every screen (ui/background.gd scales it to cover the
+## view). Any image Godot imports works: PNG, JPEG, WebP. List it in assets.json.
+@export_file("*.png", "*.jpg", "*.jpeg", "*.webp") var background_path: String = "res://assets/bg/background.png"
+
 @export_group("Board")
 ## Board cell size in pixels. Tile art is scaled to fit whatever its size.
 @export var cell_size: float = 80.0

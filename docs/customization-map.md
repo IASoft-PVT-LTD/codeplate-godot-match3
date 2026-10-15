@@ -6,7 +6,10 @@
 |---|---|---|
 | Use my own tile art | `assets/tiles/gem_N.png`, `assets.json` | `recipes/reskin-tiles.md` |
 | Change special overlays or the color bomb look | `assets/specials/*.png` | `recipes/reskin-tiles.md` |
-| Change the background | `assets/bg/background.png` (720×1280) | — |
+| Change the background | `background_path` in `config/game_config.tres` (any PNG, JPEG or WebP) | `recipes/rebrand.md` |
+| Landscape instead of portrait | `layout` in `config/game_config.tres`, the viewport in `project.godot` | `recipes/change-screen-shape.md` |
+| Add a language, a language picker | `game/strings.gd` | `recipes/add-language.md` |
+| Add a row to the settings screen | `add_row()` on the screen `CodePlateSettings.open()` returns (in `ui/title.gd`) | `recipes/add-screen.md` |
 | Add a tile color | gem texture, `tile_tints`, `max_colors` | `recipes/add-tile-color.md` |
 | Change board size, shape or holes | `levels/level_NN.json` (`width`, `height`, `holes`) | `recipes/add-level.md` |
 | Add, remove or reorder levels | `levels/` | `recipes/add-level.md` |

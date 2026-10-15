@@ -20,6 +20,11 @@ var sound_on: bool = true
 var music_volume: float = 1.0
 var sfx_volume: float = 1.0
 var fullscreen: bool = false
+## Language code -> the language's own name (game/strings.gd). The settings
+## screen shows a language row once there are two or more.
+var languages: Dictionary = Strings.LANGUAGES.duplicate()
+## The player's language; saved with the settings.
+var language: String = Strings.SOURCE
 
 ## level number (as a String, because JSON keys are strings) -> best stars / best score
 var _stars: Dictionary = {}
@@ -28,6 +33,7 @@ var _best: Dictionary = {}
 
 func _ready() -> void:
 	config = load(CONFIG_PATH)
+	Strings.install()
 	load_levels()
 	load_progress()
 	apply_fullscreen.call_deferred()
@@ -104,6 +110,18 @@ func set_fullscreen(on: bool) -> void:
 	apply_fullscreen()
 
 
+## Switches every word in the game to `code` (a key of `languages`;
+## anything else falls back to English). Screens built from code refresh when
+## they next open.
+func set_language(code: String) -> void:
+	language = code if languages.has(code) else Strings.SOURCE
+	apply_language()
+
+
+func apply_language() -> void:
+	TranslationServer.set_locale(language)
+
+
 ## Fullscreen on desktop; mobile and web builds decide this themselves.
 func apply_fullscreen() -> void:
 	if OS.has_feature("mobile") or OS.has_feature("web") or DisplayServer.get_name() == "headless":
@@ -124,7 +142,7 @@ func save_progress() -> void:
 		push_warning("Could not save progress to %s" % save_path)
 		return
 	f.store_string(JSON.stringify({"version": 1, "stars": _stars, "best": _best, "sound_on": sound_on,
-		"music_volume": music_volume, "sfx_volume": sfx_volume, "fullscreen": fullscreen}, "  "))
+		"music_volume": music_volume, "sfx_volume": sfx_volume, "fullscreen": fullscreen, "language": language}, "  "))
 
 
 func load_progress() -> void:
@@ -134,11 +152,14 @@ func load_progress() -> void:
 	music_volume = 1.0
 	sfx_volume = 1.0
 	fullscreen = false
+	language = Strings.SOURCE
 	if not FileAccess.file_exists(save_path):
+		apply_language()
 		return
 	var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(save_path))
 	if not data is Dictionary:
 		push_warning("Ignoring unreadable progress file %s" % save_path)
+		apply_language()
 		return
 	_stars = data.get("stars", {})
 	_best = data.get("best", {})
@@ -146,6 +167,9 @@ func load_progress() -> void:
 	music_volume = clampf(float(data.get("music_volume", 1.0)), 0.0, 1.0)
 	sfx_volume = clampf(float(data.get("sfx_volume", 1.0)), 0.0, 1.0)
 	fullscreen = bool(data.get("fullscreen", false))
+	var lang := str(data.get("language", Strings.SOURCE))
+	language = lang if languages.has(lang) else Strings.SOURCE
+	apply_language()
 
 
 func reset_progress() -> void:

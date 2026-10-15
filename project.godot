@@ -7,6 +7,8 @@ config_version=5
 
 config/name="Match 3"
 config/description="A match-3 puzzle game. Built from the CodePlate Godot Match 3 template."
+config/use_custom_user_dir=true
+config/custom_user_dir_name="match-3"
 run/main_scene="res://ui/title.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://assets/ui/icon.png"

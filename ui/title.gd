@@ -10,15 +10,23 @@ const SOUND_OFF := preload("res://assets/ui/sound_off.png")
 @onready var _play: Button = %PlayButton
 @onready var _settings: Button = %SettingsButton
 @onready var _sound: Button = %SoundButton
+@onready var _rows: VBoxContainer = %Rows
+@onready var _gap: Control = %Gap
 
 
 ## Widest the logo may be, in pixels. Long names shrink to fit.
 const LOGO_MAX_WIDTH := 640.0
 
+## The logo's font size before fitting (from ui/title.tscn).
+var _logo_font_size: int = 0
+
 
 func _ready() -> void:
-	_logo.text = ProjectSettings.get_setting("application/config/name", "MATCH 3").to_upper()
-	_fit_logo()
+	if Game.config.layout == "landscape":
+		# 720 px tall: tighter spacing so Play and Settings stay on screen.
+		_rows.add_theme_constant_override(&"separation", 14)
+		_gap.custom_minimum_size.y = 16.0
+	_show_logo()
 	for i: int in Game.config.max_colors:
 		var holder := Control.new()
 		holder.custom_minimum_size = Vector2(90, 110)
@@ -59,10 +67,24 @@ func open_settings() -> CodePlateSettings:
 	return s
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and _logo != null:
+		_show_logo()
+
+
+## The game name (config/name in project.godot) in the player's language,
+## in capitals, fitted to the screen.
+func _show_logo() -> void:
+	_logo.text = tr(str(ProjectSettings.get_setting("application/config/name", "Match 3"))).to_upper()
+	_fit_logo()
+
+
 ## Shrinks the logo font until the game name fits on one line.
 func _fit_logo() -> void:
 	var font := _logo.get_theme_font(&"font")
-	var size := _logo.get_theme_font_size(&"font_size")
+	if _logo_font_size == 0:
+		_logo_font_size = _logo.get_theme_font_size(&"font_size")
+	var size := _logo_font_size
 	while size > 40 and font.get_string_size(_logo.text, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x > LOGO_MAX_WIDTH:
 		size -= 4
 	_logo.add_theme_font_size_override(&"font_size", size)

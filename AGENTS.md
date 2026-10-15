@@ -93,8 +93,9 @@ How one move works:
 7. **Don't name a class after a Godot built-in.** For example `Skin`, `Theme` and `Timer` already exist; that is why the texture lookup is called `TileSkin`.
 8. **Keep the template's licensing clean.** Use only assets the user provides, assets that are the user's own, or CC0 assets. Record each new asset's `license` and `credit` in `assets.json` (use the user's name for their own assets). Don't paste code from tutorials or other projects; write it here. `CodePlate-original` marks only the template's own placeholders. For art or sound you make for the user, put their game or team name in `license` and `credit` (they own it), and say in `use` that it's a generated placeholder.
 9. **Never weaken a check to make it pass.** If a check fails, fix the cause. If the user deliberately changed a rule that a check tests (say, 4 in a row now makes a bomb), update that check to the new rule and say so.
-10. **Add checks for new rules.** When you add a mechanic in `core/`, add a check in `checks/tests/`. `Board.from_rows()` builds exact boards for this; copy the style of `test_resolver.gd`.
-11. **Keep the CodePlate credit.** This template's free license (`LICENSE.md`) asks that anything the user shares shows "Built with CodePlate (codeplate.io)" where people can see it. It's the first line of `CREDITS.md`, which players see on title > Settings > Credits, and a check fails if it goes missing. Keep it when you rebrand. The credit is only optional if `LICENSE.md` is the **CodePlate Pro License**: a copy downloaded with an active CodePlate paid plan comes with it, and names its license ID in `CODEPLATE-LICENSE.txt`. If the user asks to remove the credit and `LICENSE.md` is still the free license, tell them that.
+10. **Checks don't match the words on screen.** Find buttons and labels by node name, or compare with the constant the screen uses (`ResultPanel.LOSE_TITLE`), so rewording or translating a text breaks no check. Write new checks the same way.
+11. **Add checks for new rules.** When you add a mechanic in `core/`, add a check in `checks/tests/`. `Board.from_rows()` builds exact boards for this; copy the style of `test_resolver.gd`.
+12. **Keep the CodePlate credit.** This template's free license (`LICENSE.md`) asks that anything the user shares shows "Built with CodePlate (codeplate.io)" where people can see it. It's the first line of `CREDITS.md`, which players see on title > Settings > Credits, and a check fails if it goes missing. Keep it when you rebrand. The credit is only optional if `LICENSE.md` is the **CodePlate Pro License**: a copy downloaded with an active CodePlate paid plan comes with it, and names its license ID in `CODEPLATE-LICENSE.txt`. If the user asks to remove the credit and `LICENSE.md` is still the free license, tell them that.
 
 ## Verify
 
@@ -136,8 +137,10 @@ Step-by-step guides for common requests. Follow the matching recipe when one fit
 - `docs/recipes/change-scoring.md`: points, cascade multiplier, bonuses, star thresholds.
 - `docs/recipes/tune-game-feel.md`: speed, animation, shake, particles, sound pitch.
 - `docs/recipes/replace-sounds-and-music.md`: swap sound effects; add background music.
-- `docs/recipes/rebrand.md`: game name, icon, title screen, colors and fonts.
-- `docs/recipes/add-screen.md`: a new screen (shop, world map …) and how to navigate to it; how the built-in settings and credits screen works.
+- `docs/recipes/rebrand.md`: game name (and the Android package name), icon, title screen, background, colors and fonts.
+- `docs/recipes/add-language.md`: another language and a language picker (`game/strings.gd`).
+- `docs/recipes/change-screen-shape.md`: landscape instead of portrait (`layout` in the config).
+- `docs/recipes/add-screen.md`: a new screen (shop, world map …) and how to navigate to it; how the built-in settings and credits screen works. **To add a setting, use `add_row(control)`** on the settings screen; never reparent its nodes.
 - `docs/recipes/export.md`: build for Windows, macOS, Linux, web or Android.
 - `docs/recipes/export-android.md`: export a debug APK for a phone or emulator (the preset is included); package name, icons, and what a Play release needs.
 

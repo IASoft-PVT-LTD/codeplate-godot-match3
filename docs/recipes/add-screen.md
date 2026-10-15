@@ -22,6 +22,8 @@ Use for a shop, daily-challenge, world map or any other new screen. Settings and
 
 ## Settings and credits
 
+**To add a setting** (a toggle, a slider, a choice), build the control and hand it to `add_row` on the screen `CodePlateSettings.open()` returns: `settings.add_row(control)` puts it above Credits, `add_row(control, &"ResetButton")` above the control you name. Don't reparent the screen's own nodes. Keep the value in `Game` and save it in `save_progress()`.
+
 The title screen's Settings button opens `addons/codeplate/ui/settings_screen.gd` (`CodePlateSettings.open(self)` in `ui/title.gd`): music and sound-effect volume, fullscreen, reset progress (it asks first) and a Credits page that shows `CREDITS.md`.
 
 - **Don't edit the add-on;** it's replaced when the template updates. Change its look through `ui/theme.tres`.

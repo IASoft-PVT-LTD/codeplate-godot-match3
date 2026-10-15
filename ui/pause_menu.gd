@@ -6,6 +6,10 @@ signal resumed
 signal restart_pressed
 signal levels_pressed
 
+## The sound toggle's words (translated through game/strings.gd).
+const SOUND_ON_TEXT := "Sound: On"
+const SOUND_OFF_TEXT := "Sound: Off"
+
 @onready var _resume: Button = %ResumeButton
 @onready var _restart: Button = %RestartButton
 @onready var _sound: Button = %SoundButton
@@ -53,4 +57,4 @@ func _toggle_sound() -> void:
 
 
 func _update_sound_label() -> void:
-	_sound.text = "Sound: On" if Game.sound_on else "Sound: Off"
+	_sound.text = tr(SOUND_ON_TEXT) if Game.sound_on else tr(SOUND_OFF_TEXT)

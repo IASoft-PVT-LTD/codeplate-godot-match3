@@ -23,6 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Rows" type="VBoxContainer" parent="Center"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 28
 
@@ -34,6 +35,7 @@ theme_override_constants/separation = 6
 alignment = 1
 
 [node name="Logo" type="Label" parent="Center/Rows"]
+auto_translate_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"HeaderLabel"
@@ -50,6 +52,7 @@ text = "Swap. Match. Cascade."
 horizontal_alignment = 1
 
 [node name="Gap" type="Control" parent="Center/Rows"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 

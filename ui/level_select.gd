@@ -4,6 +4,10 @@ extends Control
 const STAR_FULL := preload("res://assets/ui/star_full.png")
 const STAR_EMPTY := preload("res://assets/ui/star_empty.png")
 const LOCK := preload("res://assets/ui/lock.png")
+## The star count in the header (translated through game/strings.gd).
+const STARS_TEXT := "%d / %d stars"
+## Size of a level button; the grid fits as many columns as the view is wide.
+const BUTTON_SIZE := 190.0
 
 @onready var _grid: GridContainer = %Grid
 @onready var _back: Button = %BackButton
@@ -22,9 +26,19 @@ func _ready() -> void:
 		total += Game.stars_for(level.number)
 		if not b.disabled:
 			last_open = b
-	_total.text = "%d / %d stars" % [total, Game.levels.size() * 3]
+	_total.text = tr(STARS_TEXT) % [total, Game.levels.size() * 3]
+	resized.connect(_fit_columns)
+	_fit_columns()
 	if last_open != null:
 		last_open.grab_focus.call_deferred()
+
+
+## As many columns as fit the view: 3 on a portrait phone, 5 in landscape.
+func _fit_columns() -> void:
+	var margin := get_node("Margin") as MarginContainer
+	var width := size.x - margin.get_theme_constant(&"margin_left") - margin.get_theme_constant(&"margin_right")
+	var gap := float(_grid.get_theme_constant(&"h_separation"))
+	_grid.columns = maxi(1, int((width + gap) / (BUTTON_SIZE + gap)))
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -34,7 +48,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _level_button(level: LevelData) -> Button:
 	var b := Button.new()
-	b.custom_minimum_size = Vector2(190, 190)
+	b.custom_minimum_size = Vector2(BUTTON_SIZE, BUTTON_SIZE)
 	b.set_meta(&"level", level.number)
 	b.disabled = not Game.is_unlocked(level.number)
 	b.tooltip_text = level.title

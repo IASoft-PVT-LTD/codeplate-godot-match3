@@ -38,6 +38,7 @@ layout_mode = 2
 theme_override_constants/separation = 18
 
 [node name="Title" type="Label" parent="Center/Panel/Rows"]
+auto_translate_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"HeaderLabel"
@@ -53,6 +54,7 @@ theme_override_constants/separation = 12
 alignment = 1
 
 [node name="Score" type="Label" parent="Center/Panel/Rows"]
+auto_translate_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 44
@@ -60,6 +62,7 @@ text = "0"
 horizontal_alignment = 1
 
 [node name="Detail" type="Label" parent="Center/Panel/Rows"]
+auto_translate_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"SmallLabel"
@@ -70,17 +73,25 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="NextButton" type="Button" parent="Center/Panel/Rows"]
+[node name="Buttons" type="BoxContainer" parent="Center/Panel/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+vertical = true
+
+[node name="NextButton" type="Button" parent="Center/Panel/Rows/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Next level"
 
-[node name="RetryButton" type="Button" parent="Center/Panel/Rows"]
+[node name="RetryButton" type="Button" parent="Center/Panel/Rows/Buttons"]
+auto_translate_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "Play again"
 
-[node name="LevelsButton" type="Button" parent="Center/Panel/Rows"]
+[node name="LevelsButton" type="Button" parent="Center/Panel/Rows/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Levels"

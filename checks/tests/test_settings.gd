@@ -80,7 +80,9 @@ func test_credits_show_codeplate_credit() -> void:
 	await frames(1)
 	expect(s.find_child("CreditsPage", true, false).is_visible_in_tree(), "Credits opens the credits page")
 	var text := s.credits_text()
-	expect(text.contains("Godot Engine"), "credits come from CREDITS.md")
+	var md := FileAccess.get_file_as_string(CodePlateSettings.CREDITS_PATH)
+	for line: PackedStringArray in CodePlateSettings.credit_lines(md):
+		expect(text.contains(line[1]), "the credits page shows CREDITS.md line '%s'" % line[1])
 	if CodePlateSettings.is_free_license():
 		expect(text.contains(CodePlateSettings.CODEPLATE_CREDIT),
 			"free license: the credits show \"%s\" (keep it in CREDITS.md)" % CodePlateSettings.CODEPLATE_CREDIT)

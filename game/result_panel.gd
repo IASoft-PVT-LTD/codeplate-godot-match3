@@ -9,6 +9,18 @@ signal levels_pressed
 const STAR_FULL := preload("res://assets/ui/star_full.png")
 const STAR_EMPTY := preload("res://assets/ui/star_empty.png")
 
+## The panel's words. Change them here; checks compare against these names,
+## never the English, and game/strings.gd translates them.
+const WIN_TITLE := "Level complete!"
+const LOSE_TITLE := "Out of moves"
+const REPLAY_WON := "Play again"
+const REPLAY_LOST := "Try again"
+const BEST := "Best: %d"
+const BONUS := "Includes %d bonus for moves left  ·  %s"
+
+## True when the panel last opened for a win.
+var won: bool = false
+
 @onready var _panel: PanelContainer = %Panel
 @onready var _title: Label = %Title
 @onready var _stars_box: HBoxContainer = %Stars
@@ -17,6 +29,7 @@ const STAR_EMPTY := preload("res://assets/ui/star_empty.png")
 @onready var _next: Button = %NextButton
 @onready var _retry: Button = %RetryButton
 @onready var _levels: Button = %LevelsButton
+@onready var _buttons: BoxContainer = %Buttons
 
 
 func _ready() -> void:
@@ -25,15 +38,16 @@ func _ready() -> void:
 	_levels.pressed.connect(_click.bind(levels_pressed))
 
 
-func open(won: bool, stars: int, score: int, best: int, bonus: int, has_next: bool) -> void:
-	_title.text = "Level complete!" if won else "Out of moves"
+func open(did_win: bool, stars: int, score: int, best: int, bonus: int, has_next: bool) -> void:
+	won = did_win
+	_title.text = tr(WIN_TITLE) if won else tr(LOSE_TITLE)
 	_score.text = str(score)
-	var detail := "Best: %d" % best
+	var detail := tr(BEST) % best
 	if bonus > 0:
-		detail = "Includes %d bonus for moves left  ·  %s" % [bonus, detail]
+		detail = tr(BONUS) % [bonus, detail]
 	_detail.text = detail
 	_next.visible = won and has_next
-	_retry.text = "Play again" if won else "Try again"
+	_retry.text = tr(REPLAY_WON) if won else tr(REPLAY_LOST)
 	for c: Node in _stars_box.get_children():
 		c.queue_free()
 	var star_nodes: Array[TextureRect] = []
@@ -57,6 +71,12 @@ func open(won: bool, stars: int, score: int, best: int, bonus: int, has_next: bo
 		tw.tween_interval(0.18)
 		tw.tween_callback(_light_star.bind(star_nodes[i], i))
 	(_next if _next.visible else _retry).grab_focus.call_deferred()
+
+
+## Landscape: Next, Retry and Levels side by side instead of stacked.
+func use_row_buttons() -> void:
+	_buttons.vertical = false
+	_panel.custom_minimum_size.x = 0.0
 
 
 func close() -> void:

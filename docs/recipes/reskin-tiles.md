@@ -37,7 +37,7 @@ Use when the user wants their own art for the gems, the specials or the color bo
 
 ## A new background?
 
-1. **Replace** `assets/bg/background.png` (720×1280, scaled to cover the screen) and update its `assets.json` entry.
+1. **Add the picture** to `assets/bg/` (PNG, JPEG or WebP, scaled to cover the screen; 720×1280 suits portrait) and list it in `assets.json`. Set `background_path` in `config/game_config.tres` to its path. No scene edit, and no need to convert a JPEG.
 2. **Check contrast.** The UI was designed on a dark background. If the new one is light or busy, look at the screenshots, especially the title tagline, the HUD and the level-select header.
 3. **Adjust** if needed:
    - `ui/theme.tres`: `font_color` and `font_outline_color` / `outline_size` for `Label` and `SmallLabel`, and the `chip` and `panel` `bg_color`

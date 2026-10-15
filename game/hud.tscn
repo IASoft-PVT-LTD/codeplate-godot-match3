@@ -17,7 +17,8 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 14
 
-[node name="Top" type="HBoxContainer" parent="Rows"]
+[node name="Top" type="BoxContainer" parent="Rows"]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 14
@@ -34,6 +35,7 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="LevelLabel" type="Label" parent="Rows/Top/InfoChip/Info"]
+auto_translate_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"SmallLabel"
@@ -41,6 +43,7 @@ text = "LEVEL 1"
 text_overrun_behavior = 3
 
 [node name="ScoreLabel" type="Label" parent="Rows/Top/InfoChip/Info"]
+auto_translate_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 46
@@ -71,13 +74,14 @@ text = "MOVES"
 horizontal_alignment = 1
 
 [node name="MovesLabel" type="Label" parent="Rows/Top/MovesChip/Moves"]
+auto_translate_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 72
 text = "20"
 horizontal_alignment = 1
 
-[node name="Goals" type="HBoxContainer" parent="Rows"]
+[node name="Goals" type="BoxContainer" parent="Rows"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2

@@ -4,6 +4,8 @@
 
 [resource]
 script = ExtResource("1_cfg")
+layout = "portrait"
+background_path = "res://assets/bg/background.png"
 cell_size = 80.0
 tile_fill = 0.92
 max_colors = 6

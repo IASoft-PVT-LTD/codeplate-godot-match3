@@ -27,3 +27,32 @@ func test_progress_round_trip() -> void:
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(Game.save_path))
 	Game.save_path = saved_path
 	Game.load_progress()
+
+
+func test_background_comes_from_the_config() -> void:
+	var path := Game.config.background_path
+	expect(ResourceLoader.exists(path), "background_path in config/game_config.tres exists: %s" % path)
+	var listed := false
+	var data: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://assets.json"))
+	if data is Dictionary:
+		for entry: Variant in (data as Dictionary).get("assets", []):
+			if entry is Dictionary and "res://" + str((entry as Dictionary).get("path", "")) == path:
+				listed = true
+	expect(listed, "background_path is listed in assets.json: %s" % path)
+	var bg: TextureRect = load("res://ui/background.tscn").instantiate()
+	tree.root.add_child(bg)
+	await frames(1)
+	expect(bg.texture != null and bg.texture.resource_path == path, "ui/background.tscn shows background_path")
+	bg.queue_free()
+	await frames(1)
+
+
+func test_the_save_keeps_the_language() -> void:
+	var saved_path := Game.save_path
+	Game.save_path = "user://check_progress_language.json"
+	Game.reset_progress()
+	var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(Game.save_path))
+	expect(data is Dictionary and (data as Dictionary).get("language", "") == Game.language, "the save file has the language")
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(Game.save_path))
+	Game.save_path = saved_path
+	Game.load_progress()
