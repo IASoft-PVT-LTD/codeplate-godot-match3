@@ -1,0 +1,7 @@
+# Godot's import cache: rebuilt by `godot --headless --import`
+.godot/
+# Screenshots from tools/screenshot.gd
+shots/
+# Export output
+export/
+build/

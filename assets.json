@@ -1,0 +1,303 @@
+{
+  "$schema": "https://codeplate.io/schema/assets-0.json",
+  "assets": [
+    {
+      "path": "assets/audio/bomb.wav",
+      "kind": "audio",
+      "use": "A bomb special fires",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/audio/click.wav",
+      "kind": "audio",
+      "use": "Button press",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/audio/color_bomb.wav",
+      "kind": "audio",
+      "use": "A color bomb fires",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/audio/invalid.wav",
+      "kind": "audio",
+      "use": "A swap that makes no match",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/audio/line.wav",
+      "kind": "audio",
+      "use": "A line special fires",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/audio/lose.wav",
+      "kind": "audio",
+      "use": "Level lost",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/audio/match.wav",
+      "kind": "audio",
+      "use": "Tiles cleared by a match (pitch rises with each cascade)",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/audio/music_theme.wav",
+      "kind": "audio",
+      "use": "Background music, a seamless 21-second loop (Audio.MUSIC theme)",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/audio/shuffle.wav",
+      "kind": "audio",
+      "use": "The board shuffles because no moves are left",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/audio/special_create.wav",
+      "kind": "audio",
+      "use": "A special tile is created",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/audio/star.wav",
+      "kind": "audio",
+      "use": "A star appears on the result screen",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/audio/swap.wav",
+      "kind": "audio",
+      "use": "Two tiles swap",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/audio/win.wav",
+      "kind": "audio",
+      "use": "Level won",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/bg/background.png",
+      "kind": "image",
+      "width": 720,
+      "height": 1280,
+      "use": "Full-screen background behind every screen, 720x1280 portrait",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/fx/beam.png",
+      "kind": "image",
+      "width": 128,
+      "height": 32,
+      "use": "Line special beam, stretched across the board; white, tinted in code",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/fx/ring.png",
+      "kind": "image",
+      "width": 128,
+      "height": 128,
+      "use": "Expanding ring for bombs and special creation; white, tinted in code",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/fx/spark.png",
+      "kind": "image",
+      "width": 32,
+      "height": 32,
+      "use": "Particle for tile bursts; white so it can be tinted per color",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/specials/bomb.png",
+      "kind": "image",
+      "width": 96,
+      "height": 96,
+      "use": "Overlay drawn on a tile that is a BOMB special",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/specials/color_bomb.png",
+      "kind": "image",
+      "width": 96,
+      "height": 96,
+      "use": "The color bomb tile (replaces the gem; it has no color)",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/specials/line_h.png",
+      "kind": "image",
+      "width": 96,
+      "height": 96,
+      "use": "Overlay drawn on a tile that is a LINE_H special (clears its row)",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/specials/line_v.png",
+      "kind": "image",
+      "width": 96,
+      "height": 96,
+      "use": "Overlay drawn on a tile that is a LINE_V special (clears its column)",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/tiles/gem_0.png",
+      "kind": "image",
+      "width": 96,
+      "height": 96,
+      "use": "Tile color 0: red heart. Shown at cell size; keep it square with transparent edges.",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/tiles/gem_1.png",
+      "kind": "image",
+      "width": 96,
+      "height": 96,
+      "use": "Tile color 1: blue diamond. Shown at cell size; keep it square with transparent edges.",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/tiles/gem_2.png",
+      "kind": "image",
+      "width": 96,
+      "height": 96,
+      "use": "Tile color 2: green emerald. Shown at cell size; keep it square with transparent edges.",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/tiles/gem_3.png",
+      "kind": "image",
+      "width": 96,
+      "height": 96,
+      "use": "Tile color 3: yellow star. Shown at cell size; keep it square with transparent edges.",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/tiles/gem_4.png",
+      "kind": "image",
+      "width": 96,
+      "height": 96,
+      "use": "Tile color 4: purple hexagon. Shown at cell size; keep it square with transparent edges.",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/tiles/gem_5.png",
+      "kind": "image",
+      "width": 96,
+      "height": 96,
+      "use": "Tile color 5: orange orb. Shown at cell size; keep it square with transparent edges.",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/ui/back.png",
+      "kind": "image",
+      "width": 64,
+      "height": 64,
+      "use": "Icon: back (white, tinted by the theme)",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/ui/check.png",
+      "kind": "image",
+      "width": 64,
+      "height": 64,
+      "use": "Icon: check (white, tinted by the theme)",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/ui/icon.png",
+      "kind": "image",
+      "width": 256,
+      "height": 256,
+      "use": "App icon (project.godot config/icon)",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/ui/lock.png",
+      "kind": "image",
+      "width": 64,
+      "height": 64,
+      "use": "Icon: lock (white, tinted by the theme)",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/ui/pause.png",
+      "kind": "image",
+      "width": 64,
+      "height": 64,
+      "use": "Icon: pause (white, tinted by the theme)",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/ui/sound_off.png",
+      "kind": "image",
+      "width": 64,
+      "height": 64,
+      "use": "Icon: sound off (white, tinted by the theme)",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/ui/sound_on.png",
+      "kind": "image",
+      "width": 64,
+      "height": 64,
+      "use": "Icon: sound on (white, tinted by the theme)",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/ui/star_empty.png",
+      "kind": "image",
+      "width": 64,
+      "height": 64,
+      "use": "Star not yet earned",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/ui/star_full.png",
+      "kind": "image",
+      "width": 64,
+      "height": 64,
+      "use": "Earned star (HUD star bar and results)",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    }
+  ]
+}

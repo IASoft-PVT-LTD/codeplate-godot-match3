@@ -1,0 +1,18 @@
+{
+  "title": "Line Up",
+  "width": 8,
+  "height": 8,
+  "colors": 5,
+  "moves": 22,
+  "goals": [
+    {
+      "kind": "specials",
+      "amount": 3
+    }
+  ],
+  "stars": [
+    2200,
+    2300,
+    2600
+  ]
+}

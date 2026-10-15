@@ -1,0 +1,18 @@
+{
+  "title": "Full Spectrum",
+  "width": 8,
+  "height": 8,
+  "colors": 6,
+  "moves": 25,
+  "goals": [
+    {
+      "kind": "score",
+      "amount": 1800
+    }
+  ],
+  "stars": [
+    2100,
+    2600,
+    3200
+  ]
+}
