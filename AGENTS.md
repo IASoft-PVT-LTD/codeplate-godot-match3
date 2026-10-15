@@ -139,6 +139,7 @@ Step-by-step guides for common requests. Follow the matching recipe when one fit
 - `docs/recipes/rebrand.md`: game name, icon, title screen, colors and fonts.
 - `docs/recipes/add-screen.md`: a new screen (shop, world map …) and how to navigate to it; how the built-in settings and credits screen works.
 - `docs/recipes/export.md`: build for Windows, macOS, Linux, web or Android.
+- `docs/recipes/export-android.md`: export a debug APK for a phone or emulator (the preset is included); package name, icons, and what a Play release needs.
 
 **Credits** live in `CREDITS.md`, shown on title > Settings > Credits (the shared screen in `addons/codeplate/ui/`). Keep its first line, "Built with CodePlate (codeplate.io)", and add a line for every asset the user brings in.
 

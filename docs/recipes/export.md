@@ -14,7 +14,7 @@ Use when the user wants a playable build for desktop, web or mobile.
    platform="Web"
    runnable=true
    export_filter="all_resources"
-   include_filter="levels/*.json, CREDITS.md"
+   include_filter="*.json, *.txt, CREDITS.md, LICENSE.md"
    exclude_filter="checks/*, tools/*, docs/*"
    export_path="export/web/index.html"
 
@@ -26,14 +26,14 @@ Use when the user wants a playable build for desktop, web or mobile.
    platform="Windows Desktop"
    runnable=true
    export_filter="all_resources"
-   include_filter="levels/*.json, CREDITS.md"
+   include_filter="*.json, *.txt, CREDITS.md, LICENSE.md"
    exclude_filter="checks/*, tools/*, docs/*"
    export_path="export/windows/MyGame.exe"
 
    [preset.1.options]
    binary_format/embed_pck=false
    ```
-   - `include_filter` matters: the game reads `levels/*.json` at runtime, and the credits page (title screen > Settings > Credits) reads `CREDITS.md`. Neither is a Godot resource, so without the filter the exported game starts with no levels, and its credits fall back to the CodePlate line alone.
+   - `include_filter` matters: the game reads `levels/*.json` at runtime, and the credits page (title screen > Settings > Credits) reads `CREDITS.md` and `LICENSE.md`. None of them is a Godot resource, so without the filter the exported game starts with no levels, and its credits fall back to the CodePlate line alone.
    - `thread_support=false` makes the web build single-threaded, so it runs on any static host. Threaded builds need the COOP/COEP headers set on the server.
 3. **Export headless:**
    ```
@@ -44,7 +44,7 @@ Use when the user wants a playable build for desktop, web or mobile.
 4. **Platform notes:**
    - **Web:** the project uses the Compatibility renderer, which is what browsers need. Serve the folder over HTTP to test (opening `index.html` as a file won't work).
    - **macOS:** builds should be signed and notarized for distribution; that needs the user's Apple developer account.
-   - **Android:** needs the Android SDK, a JDK and a keystore; follow Godot's "Exporting for Android" docs with the user.
+   - **Android:** see `export-android.md` (the project ships an Android preset).
    - **iOS:** needs a Mac with Xcode and an Apple developer account.
 5. **Orientation.** The game is portrait (`window/handheld/orientation=1`). On desktop the window opens at 450×800 (`window_width_override` / `window_height_override` in `project.godot`).
 

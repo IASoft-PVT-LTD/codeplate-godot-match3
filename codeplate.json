@@ -3,7 +3,7 @@
   "spec": 0,
   "id": "godot-match3",
   "name": "Godot Match 3",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "kind": "game",
   "summary": "A complete, polished match-3 puzzle game in Godot 4: specials, combos, cascades, level goals, stars and menus.",
   "tags": [

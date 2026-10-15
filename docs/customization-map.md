@@ -36,3 +36,4 @@
 | Music and effects volume, fullscreen, credits | `CREDITS.md`; settings in `autoload/game.gd` (the screen itself is in `addons/codeplate/ui/`) | `recipes/add-screen.md` |
 | Change screen size or orientation | `project.godot` `[display]` (keep `canvas_items` stretch) | — |
 | Build for desktop, web or mobile | export presets | `recipes/export.md` |
+| Export for Android (package name, icons, version, debug APK) | `export_presets.cfg`, `assets/launcher/*.png` | `recipes/export-android.md` |
